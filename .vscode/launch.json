@@ -14,7 +14,7 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "program": "${workspaceFolder}/src/tp1",
+            "program": "${workspaceFolder}/tp01",
             "miDebuggerPath": "/usr/bin/gdb",
             "setupCommands": [
                 {

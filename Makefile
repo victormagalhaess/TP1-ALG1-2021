@@ -1,32 +1,20 @@
 CC=g++ # compilador, troque para gcc se preferir utilizar C
 CFLAGS=-Wall -Wextra -g # compiler flags, troque o que quiser, exceto bibliotecas externas
-EXEC=./tp1 # nome do executavel que sera gerado, nao troque
-TMPOUT=tp1.testresult
+EXEC=./tp01 # nome do executavel que sera gerado, nao troque
+TMPOUT=tp01.testresult
 
-$(EXEC): main.cpp List.o Queue.o Stack.o Ship.o
-	$(CC) $(CFLAGS) main.cpp List.o Queue.o Stack.o Ship.o -o $(EXEC)
+$(EXEC): src/main.cpp HealthUnity.o
+	$(CC) $(CFLAGS) src/main.cpp HealthUnity.o -o $(EXEC)
 
-List.o: classes/List.cpp
-	$(CC) $(CFLAGS) -c classes/List.cpp -o List.o
-
-Queue.o: classes/Queue.cpp
-	$(CC) $(CFLAGS) -c classes/Queue.cpp -o Queue.o
-
-Stack.o: classes/Stack.cpp
-	$(CC) $(CFLAGS) -c classes/Stack.cpp -o Stack.o
-
-Ship.o: classes/Ship.cpp 
-	$(CC) $(CFLAGS) -c classes/Ship.cpp -o Ship.o
+HealthUnity.o: src/classes/HealthUnity.cpp
+	$(CC) $(CFLAGS) -c src/classes/HealthUnity.cpp -o HealthUnity.o
 
 test: $(EXEC)
 	@bash run_tests.sh $(EXEC) $(TMPOUT)
 
 clean: # remove todos os arquivos temporarios que forem gerados pela compilacao
-	rm -rf List.o
-	rm -rf Queue.o
-	rm -rf Stack.o 
-	rm -rf Ship.o
-	rm -rf tp1
+	rm -rf HealthUnity.o
+	rm -rf tp01
 
 # == VARIAVEIS ===
 # ================
