@@ -59,8 +59,12 @@ std::vector<int> Graph::findAllReacheableNodes(int depthMax)
     return (allReachedNodes);
 }
 
-bool Graph::isCyclicUtil(int v, bool visited[], bool *recStack)
+bool Graph::isCyclicUtil(int v, std::vector<bool> visited, std::vector<bool> recStack)
 {
+    if (v == 0)
+    {
+        return false;
+    }
     if (visited[v] == false)
     {
         visited[v] = true;
@@ -81,15 +85,14 @@ bool Graph::isCyclicUtil(int v, bool visited[], bool *recStack)
 
 bool Graph::isCyclic()
 {
-    bool *visited = new bool[this->numberOfNodes];
-    bool *recStack = new bool[this->numberOfNodes];
+
     for (int i = 0; i < this->numberOfNodes; i++)
     {
-        visited[i] = false;
-        recStack[i] = false;
+        this->visited.push_back(false);
+        this->recStack.push_back(false);
     }
-    for (int i = 0; i < this->numberOfNodes; i++)
-        if (isCyclicUtil(i, visited, recStack))
+    for (int i = this->numberOfCD; i < this->numberOfNodes; i++)
+        if (isCyclicUtil(i, this->visited, this->recStack))
             return true;
 
     return false;

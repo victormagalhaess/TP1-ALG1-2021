@@ -11,6 +11,8 @@ namespace vaccineDistribution
     {
     private:
         int numberOfNodes;
+        std::vector<bool> visited;
+        std::vector<bool> recStack;
 
     public:
         int numberOfCD;
@@ -19,7 +21,7 @@ namespace vaccineDistribution
         void setNumberOfNodes(int newNumberOfNodes);
         std::vector<std::vector<int>> adjacencyList;
         std::vector<int> getCycles();
-        bool isCyclicUtil(int v, bool visited[], bool *recStack);
+        bool isCyclicUtil(int v, std::vector<bool> visited, std::vector<bool> recStack);
         bool isCyclic();
 
         std::vector<int> findAllReacheableNodes(int depthMax);

@@ -63,7 +63,7 @@ int main()
     }
 
     std::cout << std::endl
-              << 1; //graph->isCyclic();
+              << graph->isCyclic();
 
     int x = 4;
     return 0;
