@@ -3,17 +3,23 @@ CFLAGS=-Wall -Wextra -g # compiler flags, troque o que quiser, exceto biblioteca
 EXEC=./tp01 # nome do executavel que sera gerado, nao troque
 TMPOUT=tp01.testresult
 
-$(EXEC): src/main.cpp HealthUnity.o
-	$(CC) $(CFLAGS) src/main.cpp HealthUnity.o -o $(EXEC)
+$(EXEC): src/main.cpp Graph.o
+	$(CC) $(CFLAGS) src/main.cpp Graph.o -o $(EXEC)
+	rm -rf HealthUnity.o
+	rm -rf Graph.o
 
 HealthUnity.o: src/classes/HealthUnity.cpp
 	$(CC) $(CFLAGS) -c src/classes/HealthUnity.cpp -o HealthUnity.o
+
+Graph.o: src/classes/Graph.cpp
+	$(CC) $(CFLAGS) -c src/classes/Graph.cpp -o Graph.o
 
 test: $(EXEC)
 	@bash run_tests.sh $(EXEC) $(TMPOUT)
 
 clean: # remove todos os arquivos temporarios que forem gerados pela compilacao
 	rm -rf HealthUnity.o
+	rm -rf Graph.o
 	rm -rf tp01
 
 # == VARIAVEIS ===
