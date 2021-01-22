@@ -11,8 +11,6 @@ namespace vaccineDistribution
     {
     private:
         int numberOfNodes;
-        std::vector<bool> visited;
-        std::vector<bool> recStack;
 
     public:
         int numberOfCD;
