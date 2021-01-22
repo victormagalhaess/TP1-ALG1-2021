@@ -59,41 +59,49 @@ std::vector<int> Graph::findAllReacheableNodes(int depthMax)
     return (allReachedNodes);
 }
 
-bool Graph::isCyclicUtil(int v, std::vector<bool> visited, std::vector<bool> recStack)
-{
-    if (v == 0)
-    {
-        return false;
-    }
-    if (visited[v] == false)
-    {
-        visited[v] = true;
-        recStack[v] = true;
-
-        std::vector<int>::iterator i;
-        for (i = this->adjacencyList[v].begin(); i != this->adjacencyList[v].end(); ++i)
-        {
-            if (!visited[*i] && isCyclicUtil(*i, visited, recStack))
-                return true;
-            else if (recStack[*i])
-                return true;
-        }
-    }
-    recStack[v] = false;
-    return false;
-}
-
 bool Graph::isCyclic()
 {
 
-    for (int i = 0; i < this->numberOfNodes; i++)
-    {
-        this->visited.push_back(false);
-        this->recStack.push_back(false);
-    }
-    for (int i = this->numberOfCD; i < this->numberOfNodes; i++)
-        if (isCyclicUtil(i, this->visited, this->recStack))
-            return true;
+    std::vector<int> justChecked(this->numberOfNodes, 0);
+    std::stack<int> elements;
+    std::vector<int> onThisCycle;
+    bool hasCycles = false;
 
-    return false;
+    for (int i = 0; i < numberOfCD; i++)
+    {
+        elements.push(i);
+        onThisCycle.push_back(i);
+
+        while (!elements.empty())
+        {
+            int position = elements.top();
+            elements.pop();
+            if (justChecked[position] == 0)
+            {
+                justChecked[position]++;
+                for (auto it = adjacencyList[position + numberOfCD - 1].begin(); it != adjacencyList[position + numberOfCD - 1].end(); it++)
+                {
+                    if (*it == 0)
+                    {
+                        for (auto jit = onThisCycle.begin(); jit != onThisCycle.end(); jit++)
+                        {
+                            justChecked[*jit] = 0;
+                            *jit = 0;
+                        }
+                    }
+                    else
+                    {
+                        elements.push(*it);
+                        onThisCycle.push_back(*it);
+                    }
+                }
+            }
+            else if (justChecked[position] == 1)
+            {
+                hasCycles = true;
+                break;
+            }
+        }
+    }
+    return hasCycles;
 }

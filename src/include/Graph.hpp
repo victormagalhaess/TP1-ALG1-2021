@@ -18,13 +18,12 @@ namespace vaccineDistribution
         int numberOfCD;
         int numberOfPV;
         int getNumberOfNodes();
-        void setNumberOfNodes(int newNumberOfNodes);
         std::vector<std::vector<int>> adjacencyList;
-        std::vector<int> getCycles();
-        bool isCyclicUtil(int v, std::vector<bool> visited, std::vector<bool> recStack);
-        bool isCyclic();
 
+        void setNumberOfNodes(int newNumberOfNodes);
+        bool isCyclic();
         std::vector<int> findAllReacheableNodes(int depthMax);
+
         Graph();
         ~Graph();
     };

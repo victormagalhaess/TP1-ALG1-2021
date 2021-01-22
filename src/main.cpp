@@ -65,6 +65,5 @@ int main()
     std::cout << std::endl
               << graph->isCyclic();
 
-    int x = 4;
     return 0;
 }
